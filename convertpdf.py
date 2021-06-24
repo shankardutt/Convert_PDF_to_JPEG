@@ -21,9 +21,12 @@ def get_image_download_link(img,filename,text):
     return href
 
 if uploaded_file is not None and uploaded_file.type == "application/pdf":
-    images = convert_from_bytes(uploaded_file.read(),dpi=300)
-    for index, page in enumerate(images):
-        st.image(page, use_column_width=True)
-        name = os.path.splitext(uploaded_file.name)[0]
-        st.markdown(get_image_download_link(page, name+'_page_'+f'{index+1}'+'.jpg', 'Download ' + name +'_page_'+f'{index+1}'+ '.jpg'), unsafe_allow_html=True)
+    try:
+        images = convert_from_bytes(uploaded_file.read(),dpi=300)
+        for index, page in enumerate(images):
+            st.image(page, use_column_width=True)
+            name = os.path.splitext(uploaded_file.name)[0]
+            st.markdown(get_image_download_link(page, name+'_page_'+f'{index+1}'+'.jpg', 'Download ' + name +'_page_'+f'{index+1}'+ '.jpg'), unsafe_allow_html=True)
+else:
+    st.write("Choose different file. Input file not correct")
 
