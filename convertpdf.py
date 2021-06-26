@@ -11,7 +11,7 @@ st.set_page_config(page_title="Convert PDF to JPEG", initial_sidebar_state="expa
 st.sidebar.title("Convert PDF to JPEG")
 st.sidebar.subheader("Author: Shankar Dutt (shankar.dutt@anu.edu.au) and Vanessa Moss (vanessa.moss@csiro.au)")
 
-uploaded_file = st.file_uploader("Choose a PDF file", type=['pdf', ' '])
+uploaded_file = st.file_uploader("Choose a PDF file", type=['pdf'])
 
 def get_image_download_link(img,filename,text):
     buffered = BytesIO()
