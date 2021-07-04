@@ -23,11 +23,17 @@ def get_image_download_link(img,filename,text):
 if uploaded_file is not None and uploaded_file.type == "application/pdf":
     try:
         images = convert_from_bytes(uploaded_file.read(),size=(4096,None))
+        images_small = convert_from_bytes(uploaded_file.read(),size=(1024,None))
         for index, page in enumerate(images):
             st.image(page, use_column_width=True)
             st.image(page, use_column_width=True)
             name = os.path.splitext(uploaded_file.name)[0]
             st.markdown(get_image_download_link(page, name+'_page_'+f'{index+1}'+'.jpg', 'Download ' + name +'_page_'+f'{index+1}'+ '.jpg'), unsafe_allow_html=True)
+        for index, page in enumerate(images_small):
+            st.image(page, use_column_width=True)
+            st.image(page, use_column_width=True)
+            name = os.path.splitext(uploaded_file.name)[0]
+            st.markdown(get_image_download_link(page, name+'_page_'+f'{index+1}'+'_thumb'+'.jpg', 'Download ' + name +'_page_'+f'{index+1}'+'_thumb'+ '.jpg'), unsafe_allow_html=True)
     except:
         st.write("Choose different file. Input file not correct")
 
